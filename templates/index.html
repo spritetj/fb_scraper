@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Comment Scraper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📱 Facebook Comment Scraper</h1>
+            <p>Simple, powerful comment extraction tool</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Left Panel: Input -->
+            <div class="panel">
+                <h2>⚙️ Setup</h2>
+
+                <!-- Cookies Input -->
+                <div class="input-section">
+                    <h3>1. Facebook Cookies</h3>
+                    <p class="hint">Export cookies from Facebook using Cookie-Editor extension</p>
+
+                    <div class="file-upload">
+                        <input type="file" id="cookieFile" accept=".json" style="display: none;">
+                        <button onclick="document.getElementById('cookieFile').click()" class="btn-secondary">
+                            📁 Upload cookies.json
+                        </button>
+                        <span id="cookieFileName" class="file-name"></span>
+                    </div>
+
+                    <p class="or-divider">OR</p>
+
+                    <textarea id="cookieText" placeholder='Paste cookies JSON here...
+Example:
+[
+  {
+    "name": "c_user",
+    "value": "...",
+    "domain": ".facebook.com"
+  },
+  ...
+]'></textarea>
+                    <div id="cookieStatus" class="status"></div>
+                </div>
+
+                <!-- URLs Input -->
+                <div class="input-section">
+                    <h3>2. Facebook URLs</h3>
+                    <p class="hint">One URL per line (supports POST, WATCH, REEL)</p>
+
+                    <textarea id="urlText" placeholder="https://www.facebook.com/user/posts/123...
+https://www.facebook.com/watch/?v=456...
+https://www.facebook.com/reel/789..."></textarea>
+                    <div id="urlCount" class="url-count">0 URLs</div>
+                </div>
+
+                <!-- Settings -->
+                <div class="input-section">
+                    <h3>3. Settings (Optional)</h3>
+                    <label>
+                        Screen Size:
+                        <select id="viewport">
+                            <option value="13_inch">13" Laptop (1280x800)</option>
+                            <option value="16_inch">16" Laptop (1920x1080)</option>
+                        </select>
+                    </label>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="startBtn" class="btn-primary" onclick="startScraping()">
+                        🚀 Start Scraping
+                    </button>
+                    <button id="stopBtn" class="btn-danger" onclick="stopScraping()" disabled>
+                        ⏹️ Stop
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output -->
+            <div class="panel">
+                <h2>📊 Results</h2>
+
+                <!-- Status -->
+                <div id="statusBar" class="status-bar status-idle">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Ready</span>
+                </div>
+
+                <!-- Live Log -->
+                <div class="log-section">
+                    <h3>Live Log</h3>
+                    <div id="logOutput" class="log-output"></div>
+                    <button onclick="clearLog()" class="btn-secondary btn-small">Clear Log</button>
+                </div>
+
+                <!-- Output Files -->
+                <div class="files-section">
+                    <h3>Output Files</h3>
+                    <div id="fileList" class="file-list"></div>
+                    <button onclick="refreshFiles()" class="btn-secondary btn-small">🔄 Refresh</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ for easy Facebook comment scraping</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
