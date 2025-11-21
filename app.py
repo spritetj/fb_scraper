@@ -214,6 +214,13 @@ if __name__ == '__main__':
     Path(app.config['OUTPUT_FOLDER']).mkdir(exist_ok=True)
     Path('logs').mkdir(exist_ok=True)
 
+    # Auto-install Playwright browsers if needed
+    try:
+        import setup_playwright
+        setup_playwright.install_playwright()
+    except Exception as e:
+        print(f"Warning: Could not run auto-setup: {e}")
+
     # Try ports 5001-5010 to avoid conflicts (macOS AirPlay uses 5000)
     import socket
 
