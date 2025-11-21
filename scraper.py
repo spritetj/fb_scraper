@@ -8,6 +8,7 @@ import asyncio
 import csv
 import re
 import random
+import traceback
 from pathlib import Path
 from datetime import datetime
 from playwright.async_api import async_playwright, Page, Browser
@@ -1151,7 +1152,9 @@ class FacebookCommentScraper:
                         'error': f"Scraping error: {str(e)}, Save error: {str(save_error)}"
                     }
             else:
+                error_msg = f"{str(e)}\n{traceback.format_exc()}"
+                self.log(f"❌ Error details: {error_msg}")
                 return {
                     'success': False,
-                    'error': str(e)
+                    'error': error_msg
                 }

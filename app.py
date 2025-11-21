@@ -10,6 +10,7 @@ import os
 import threading
 import queue
 import time
+import traceback
 from datetime import datetime
 from pathlib import Path
 import asyncio
@@ -63,7 +64,8 @@ def run_scraper(urls, cookies, settings):
             log(f"❌ Scraping failed: {result['error']}")
 
     except Exception as e:
-        log(f"❌ Error: {str(e)}")
+        error_msg = f"{str(e)}\n{traceback.format_exc()}"
+        log(f"❌ Error: {error_msg}")
     finally:
         scraper_running = False
         current_scraper = None
